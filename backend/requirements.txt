@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings
+sqlalchemy
+pytz
+pycountry
+PyJWT
+bcrypt
+python-multipart
+cryptography
