@@ -5,6 +5,10 @@ const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
+            path: '/',
+            name: 'index'
+        },
+        {
             path: '/user/:id',
             component: () => import('@/pages/users/UserPage.vue'),
             name: 'users.index'
@@ -70,6 +74,11 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const userStore = useUserStore()
+
+    if (to.name === "index")
+    {
+        next({ name: "feed.index" })
+    }
 
   if (to.meta.requiresAuth && !userStore.isAuth) {
     next({ name: "login.index" })
