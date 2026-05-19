@@ -2,8 +2,6 @@ from pydantic_settings import BaseSettings
 from pathlib import Path
 import os
 
-cors_origins = os.getenv("CORS_ORIGINS", "").split(",")
-
 
 class Settings(BaseSettings):
     app_name: str = "FastAPI Blog"
@@ -16,7 +14,7 @@ class Settings(BaseSettings):
         "http://127.0.0.1:3000",
         "http://localhost:8080",
         "http://127.0.0.1:8080",
-    ] + cors_origins
+    ]
     static_dir: str = "static"
     images_dir: str = "static/images"
 
@@ -31,3 +29,7 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
+
+cors_origins = os.getenv("CORS_ORIGINS", "").split(",")
+if cors_origins:
+    settings.cors_origins += cors_origins.split(",")
