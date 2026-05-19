@@ -1,7 +1,6 @@
 import axios from 'axios'
 
-import { inject } from 'vue'
-const apiUrl = inject('apiUrl')
+import { apiUrl } from './main'
 
 export const api = axios.create({
   baseURL: apiUrl
