@@ -20,7 +20,7 @@ export const useWebsocketStore = defineStore('websockets', {
             
 
             const token = localStorage.getItem("access_token")
-            const url = `ws://${apiUrl}/api/ws/chat/${chatId}?token=${token}`
+            const url = `wss://fastapi-vue-js-social-media-1.onrender.com/api/ws/chat/${chatId}?token=${token}`
 
             this.ws = new WebSocket(url)
 
