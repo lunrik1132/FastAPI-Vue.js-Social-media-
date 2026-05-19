@@ -29,7 +29,3 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
-
-cors_origins = os.getenv("CORS_ORIGINS", "").split(",")
-if cors_origins:
-    settings.cors_origins += cors_origins.split(",")
