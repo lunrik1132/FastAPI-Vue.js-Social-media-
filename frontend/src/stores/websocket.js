@@ -3,7 +3,8 @@ import axios from 'axios';
 import { useUserStore } from './user';
 import { useChatStore } from './chat';
 import { api } from '@/api';
-
+import { inject } from 'vue'
+const apiUrl = inject('apiUrl')
 export const useWebsocketStore = defineStore('websockets', {
     state: () => ({
         ws: null,
@@ -19,7 +20,7 @@ export const useWebsocketStore = defineStore('websockets', {
             
 
             const token = localStorage.getItem("access_token")
-            const url = `ws://localhost:8000/api/ws/chat/${chatId}?token=${token}`
+            const url = `ws://${apiUrl}/api/ws/chat/${chatId}?token=${token}`
 
             this.ws = new WebSocket(url)
 

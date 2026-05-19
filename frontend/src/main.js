@@ -13,3 +13,5 @@ app.use(router)
    .use(pinia)
 
 app.mount('#app')
+
+app.provide('apiUrl', 'https://fastapi-vue-js-social-media-1.onrender.com')

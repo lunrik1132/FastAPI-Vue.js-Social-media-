@@ -2,7 +2,8 @@ import { defineStore } from 'pinia'
 import axios from 'axios';
 import { useUserStore } from './user';
 import { api } from '@/api';
-
+import { inject } from 'vue'
+const apiUrl = inject('apiUrl')
 export const usePostStore = defineStore('posts', {
     state: () => ({
         posts: [],
@@ -31,7 +32,7 @@ export const usePostStore = defineStore('posts', {
             this.loading = true
 
             try {
-                const res = await axios.get(`http://127.0.0.1:8000/api/posts/user/destination/${userId}`, {
+                const res = await axios.get(`${apiUrl}/api/posts/user/destination/${userId}`, {
                     params: {
                         limit: this.limit,
                         offset: this.offset
@@ -64,7 +65,7 @@ export const usePostStore = defineStore('posts', {
             this.loading = true
 
             try {
-                const res = await axios.get(`http://127.0.0.1:8000/api/posts`, {
+                const res = await axios.get(`${apiUrl}/api/posts`, {
                     params: {
                         limit: 10,
                         offset: this.offset
@@ -154,7 +155,7 @@ export const usePostStore = defineStore('posts', {
             try {
                 const post = this.posts.find(p => p.id === postId)
 
-                const res = await axios.get(`http://127.0.0.1:8000/api/posts/${postId}/comments`, {
+                const res = await axios.get(`${apiUrl}/api/posts/${postId}/comments`, {
                     params: {
                         limit: limit,
                         offset: post.commentsOffset

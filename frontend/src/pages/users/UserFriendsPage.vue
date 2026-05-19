@@ -2,6 +2,8 @@
 import { useUserStore } from '@/stores/user';
 import { onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
+import { inject } from 'vue'
+const apiUrl = inject('apiUrl')
 
 onMounted(async () => {
     const preserved = userStore.avatarVersion
@@ -46,7 +48,7 @@ const loadMoreRef = ref(null)
                 <div class="friend flex px-3 py-2 my-3 rounded-xl bg-gray-200">
                     <div v-if="friend.addressee_id == userId" class="flex">
                         <router-link :to="{name: 'users.index', params: { id: friend.requester_id } }" class="image">
-                            <img :src="`http://localhost:8000/api/users/${friend.requester_id}/avatar?v=${userStore.avatarVersion}`" class="border border-white w-15 h-15 rounded-full object-cover">
+                            <img :src="`${apiUrl}/api/users/${friend.requester_id}/avatar?v=${userStore.avatarVersion}`" class="border border-white w-15 h-15 rounded-full object-cover">
                         </router-link>
                         <router-link :to="{name: 'users.index', params: { id: friend.requester_id } }" class="name ml-3 my-auto">
                             {{ friend.requester.login }}
@@ -54,7 +56,7 @@ const loadMoreRef = ref(null)
                     </div>
                     <div v-else class="flex">
                         <router-link :to="{name: 'users.index', params: { id: friend.addressee_id } }" class="image">
-                            <img :src="`http://localhost:8000/api/users/${friend.addressee_id}/avatar?v=${userStore.avatarVersion}`" class="border border-white w-15 h-15 rounded-full object-cover">
+                            <img :src="`${apiUrl}/api/users/${friend.addressee_id}/avatar?v=${userStore.avatarVersion}`" class="border border-white w-15 h-15 rounded-full object-cover">
                         </router-link>
                         <router-link :to="{name: 'users.index', params: { id: friend.addressee_id } }" class="name ml-3 my-auto">
                             {{ friend.addressee.login }}

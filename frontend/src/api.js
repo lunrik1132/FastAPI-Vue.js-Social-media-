@@ -1,7 +1,10 @@
 import axios from 'axios'
 
+import { inject } from 'vue'
+const apiUrl = inject('apiUrl')
+
 export const api = axios.create({
-  baseURL: 'http://127.0.0.1:8000'
+  baseURL: apiUrl
 })
 
 api.interceptors.request.use(config => {
@@ -29,7 +32,7 @@ api.interceptors.response.use(
         const refreshToken = localStorage.getItem('refresh_token')
 
         const res = await axios.post(
-          'http://127.0.0.1:8000/api/jwt/refresh',
+          `${apiUrl}/api/jwt/refresh`,
           {},
           {
             headers: {

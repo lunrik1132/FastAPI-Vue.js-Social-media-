@@ -4,6 +4,8 @@ import { useUserStore } from '@/stores/user';
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
+import { inject } from 'vue'
+const apiUrl = inject('apiUrl')
 
 onMounted(async () => {
     chatStore.$reset()
@@ -55,7 +57,7 @@ const deleteChat = async (chat) => {
                 <div v-if="(other = getOtherMember(chat))" class="flex">
                     <div class="w-15 h-15">
                         <button @click.stop="goToUser(chat)" class="image">
-                            <img :src="`http://localhost:8000/api/users/${other.user_id}/avatar?v=${userStore.avatarVersion}`" class="cursor-pointer border border-white w-15 h-15 rounded-full object-cover">
+                            <img :src="`${apiUrl}/api/users/${other.user_id}/avatar?v=${userStore.avatarVersion}`" class="cursor-pointer border border-white w-15 h-15 rounded-full object-cover">
                         </button>
                     </div>
                     <div class="ml-3 my-auto w-[60%] flex-shrink min-w-0">

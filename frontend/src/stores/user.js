@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
 import axios from 'axios';
 import { api } from '@/api';
-
+import { inject } from 'vue'
+const apiUrl = inject('apiUrl')
 const getPayload = () => {
     const token = localStorage.getItem('access_token');
     if (!token) return {};
@@ -30,8 +31,8 @@ export const useUserStore = defineStore('users', {
             friends: []
         },
         isAuth: !!localStorage.getItem('access_token'),
-        // bgImage_default: 'http://localhost:8000/static/images/default_bgimage.jpg',
-        // avatar_default: 'http://localhost:8000/static/images/default_image.jpg',
+        // bgImage_default: '${apiUrl}/static/images/default_bgimage.jpg',
+        // avatar_default: '${apiUrl}/static/images/default_image.jpg',
         avatarVersion: 0,
         bgVersion: 0,
     }),
@@ -42,25 +43,25 @@ export const useUserStore = defineStore('users', {
             if (!state.user?.id) {
                 return ''
             }
-            return `http://localhost:8000/api/users/${state.user.id}/avatar?v=${state.avatarVersion}`
+            return `${apiUrl}/api/users/${state.user.id}/avatar?v=${state.avatarVersion}`
         },
         bgImage: (state) => {
             if (!state.user?.id) {
                 return ''
             }
-            return `http://localhost:8000/api/users/${state.user.id}/bgimage?v=${state.bgVersion}`
+            return `${apiUrl}/api/users/${state.user.id}/bgimage?v=${state.bgVersion}`
         },
     },
 
     actions: {
         async getUser(userId){
-            const res = await axios.get(`http://127.0.0.1:8000/api/users/id/${userId}`)
+            const res = await axios.get(`${apiUrl}/api/users/id/${userId}`)
             
             this.user = res.data
 
         },
         async getUsersByLogin(login){
-            const res = await axios.get(`http://127.0.0.1:8000/api/users/search`, {
+            const res = await axios.get(`${apiUrl}/api/users/search`, {
                 params: {
                     query: login
                 }
@@ -77,7 +78,7 @@ export const useUserStore = defineStore('users', {
             this.loading = true
 
             try {
-                const res = await axios.get(`http://127.0.0.1:8000/api/users/friends/accepted/${userId}`, {
+                const res = await axios.get(`${apiUrl}/api/users/friends/accepted/${userId}`, {
                     params: {
                         limit: limit,
                         offset: this.friend_accepted_offset
@@ -146,7 +147,7 @@ export const useUserStore = defineStore('users', {
         },
         async storeUser(login, password, gender, birthday, country){
             try{
-                const res = await axios.post(`http://127.0.0.1:8000/api/users`, {
+                const res = await axios.post(`${apiUrl}/api/users`, {
                     login: login,
                     password: password,
                     gender: gender,
@@ -163,7 +164,7 @@ export const useUserStore = defineStore('users', {
         },
         async loginUser(login, password){
             try {
-                const res = await axios.post('http://127.0.0.1:8000/api/jwt/login',
+                const res = await axios.post('${apiUrl}/api/jwt/login',
                 {
                     login: login,
                     password: password

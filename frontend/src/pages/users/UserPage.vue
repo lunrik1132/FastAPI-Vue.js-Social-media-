@@ -11,7 +11,8 @@ import { formatDate } from '@/utils/formatDate';
 import { formatTimeAgo } from '@/utils/formatTimeAgo';
 import { computed, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
-
+import { inject } from 'vue'
+const apiUrl = inject('apiUrl')
 defineOptions({
     name: "UserProfile"
 })
@@ -246,13 +247,13 @@ watch(isEditPhotoOpen, (isOpen) => {
                         <div v-for="friend in visibleFriends" :key="friend.id" class="flex flex-col items-center flex-grow-0 flex-shrink-0" style="min-width: 60px; width: calc(33.333% - 1rem);">
                             <router-link v-if="friend.addressee_id === userStore.user.id" class="friend" :to="{name: 'users.index', params: { id: friend.requester_id } }">
                                 <div>
-                                    <img :src="`http://localhost:8000/api/users/${friend.requester_id}/avatar?v=${userStore.avatarVersion}`" class="border border-white w-15 h-15 rounded-full object-cover shrink-0">
+                                    <img :src="`${apiUrl}/api/users/${friend.requester_id}/avatar?v=${userStore.avatarVersion}`" class="border border-white w-15 h-15 rounded-full object-cover shrink-0">
                                     <span class="text-sm truncate max-w-[60px] block text-center">{{ friend.requester.login }}</span>
                                 </div>
                             </router-link>
                             <router-link v-else class="friend" :to="{name: 'users.index', params: { id: friend.addressee_id  } }">
                                 <div>
-                                    <img :src="`http://localhost:8000/api/users/${friend.addressee_id}/avatar?v=${userStore.avatarVersion}`" class="border border-white w-15 h-15 rounded-full object-cover shrink-0">
+                                    <img :src="`${apiUrl}/api/users/${friend.addressee_id}/avatar?v=${userStore.avatarVersion}`" class="border border-white w-15 h-15 rounded-full object-cover shrink-0">
                                     <span class="text-sm truncate max-w-[60px] block text-center">{{ friend.addressee.login }}</span>
                                 </div>
                             </router-link>

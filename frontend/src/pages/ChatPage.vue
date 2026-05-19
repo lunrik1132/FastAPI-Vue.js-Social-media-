@@ -5,6 +5,8 @@ import { useWebsocketStore } from '@/stores/websocket'
 import { nextTick, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
+import { inject } from 'vue'
+const apiUrl = inject('apiUrl')
 
 onMounted(async() => {
     websocketStore.$reset()
@@ -83,7 +85,7 @@ watch(
     <div class="chat mt-4 bg-white rounded-lg max-w-2xl w-full h-[85vh] flex flex-col pb-1 text-lg">
         <div v-if="other_user" class="user-info flex shadow py-3 pl-10">
             <router-link :to="{name: 'users.index', params: { id: other_user.user_id } }" class="image">
-                <img :src="`http://localhost:8000/api/users/${other_user.user_id}/avatar?v=${userStore.avatarVersion}`" class="border border-white w-15 h-15 rounded-full object-cover">
+                <img :src="`${apiUrl}/api/users/${other_user.user_id}/avatar?v=${userStore.avatarVersion}`" class="border border-white w-15 h-15 rounded-full object-cover">
             </router-link>
             <router-link :to="{name: 'users.index', params: { id: other_user.user_id } }" class="name ml-3 my-auto">
                 {{ other_user.user.login }}

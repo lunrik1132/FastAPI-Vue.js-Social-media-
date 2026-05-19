@@ -1,10 +1,12 @@
 <script setup>
+import { api } from '@/api';
 import { usePostStore } from '@/stores/post';
 import { useUserStore } from '@/stores/user';
 import { formatDate } from '@/utils/formatDate';
 import { formatTimeAgo } from '@/utils/formatTimeAgo';
 import { ref, watch } from 'vue';
-
+import { inject } from 'vue'
+const apiUrl = inject('apiUrl')
 const postStore = usePostStore()
 const userStore = useUserStore()
 
@@ -40,7 +42,7 @@ const autoResize = (event) => {
     <div class="post bg-white rounded-lg max-w-2xl w-full pt-5 pb-1 px-5 text-lg mb-2">
         <div class="post-header flex pb-3">
             <router-link :to="{name: 'users.index', params: { id: post.author_id } }" class="photo">
-                <img :src="`http://localhost:8000/api/users/${post.author_id}/avatar?v=${userStore.avatarVersion}`" class="border border-white w-13 h-13 rounded-full object-cover">
+                <img :src="`${apiUrl}/api/users/${post.author_id}/avatar?v=${userStore.avatarVersion}`" class="border border-white w-13 h-13 rounded-full object-cover">
             </router-link>
             <div class="author pt-3 pl-3 text-lg">
                 <router-link :to="{name: 'users.index', params: { id: post.author_id } }" >{{ post.author.login }}</router-link>
@@ -75,7 +77,7 @@ const autoResize = (event) => {
             <div v-for="comment in [...(post.comments || []), ...(post.newComments || [])]" class="post-comments mb-3">
                 <div class="comment flex">
                     <div class="comment-image min-w-10">
-                        <img :src="`http://localhost:8000/api/users/${comment.author_id}/avatar?v=${userStore.avatarVersion}`" class="border border-white w-10 h-10 rounded-full object-cover">
+                        <img :src="`${apiUrl}/api/users/${comment.author_id}/avatar?v=${userStore.avatarVersion}`" class="border border-white w-10 h-10 rounded-full object-cover">
                     </div>
                     <div class="comment-body flex-1 pl-2 text-base">
                         <div class="comment-author pt-1">
@@ -99,7 +101,7 @@ const autoResize = (event) => {
             </div>
             <div v-if="userStore.isAuth" class="comment-create flex">
                 <div class="image shrink-0 ">
-                    <img :src="`http://localhost:8000/api/users/${userStore.payload.id}/avatar?v=${userStore.avatarVersion}`" class="border border-white w-10 h-10 rounded-full object-cover">
+                    <img :src="`${apiUrl}/api/users/${userStore.payload.id}/avatar?v=${userStore.avatarVersion}`" class="border border-white w-10 h-10 rounded-full object-cover">
                 </div>
                 <div class="textarea mx-2">
                     <textarea @input="autoResize" v-model="newCommentText[post.id]" maxlength="150" rows="1" cols="60" class="w-full flex-1 p-2 border border-gray-300 rounded-lg bg-gray-100 resize-none focus:outline-none text-base" placeholder="Add comment"></textarea>
