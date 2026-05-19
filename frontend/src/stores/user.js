@@ -163,7 +163,7 @@ export const useUserStore = defineStore('users', {
         },
         async loginUser(login, password){
             try {
-                const res = await axios.post('${apiUrl}/api/jwt/login',
+                const res = await axios.post(`${apiUrl}/api/jwt/login`,
                 {
                     login: login,
                     password: password
