@@ -2,8 +2,7 @@ import { defineStore } from 'pinia'
 import axios from 'axios';
 import { useUserStore } from './user';
 import { api } from '@/api';
-import { inject } from 'vue'
-const apiUrl = inject('apiUrl')
+import { apiUrl } from '@/main';
 export const usePostStore = defineStore('posts', {
     state: () => ({
         posts: [],

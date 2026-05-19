@@ -4,8 +4,7 @@ import { useUserStore } from '@/stores/user';
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
-import { inject } from 'vue'
-const apiUrl = inject('apiUrl')
+import { apiUrl } from '@/main';
 
 onMounted(async () => {
     chatStore.$reset()

@@ -5,8 +5,7 @@ import { useUserStore } from '@/stores/user';
 import { formatDate } from '@/utils/formatDate';
 import { formatTimeAgo } from '@/utils/formatTimeAgo';
 import { ref, watch } from 'vue';
-import { inject } from 'vue'
-const apiUrl = inject('apiUrl')
+import { apiUrl } from '@/main';
 const postStore = usePostStore()
 const userStore = useUserStore()
 

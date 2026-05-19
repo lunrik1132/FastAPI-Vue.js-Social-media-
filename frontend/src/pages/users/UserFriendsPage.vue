@@ -2,8 +2,8 @@
 import { useUserStore } from '@/stores/user';
 import { onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import { inject } from 'vue'
-const apiUrl = inject('apiUrl')
+
+import { apiUrl } from '@/main';
 
 onMounted(async () => {
     const preserved = userStore.avatarVersion

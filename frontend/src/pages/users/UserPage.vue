@@ -11,8 +11,7 @@ import { formatDate } from '@/utils/formatDate';
 import { formatTimeAgo } from '@/utils/formatTimeAgo';
 import { computed, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import { inject } from 'vue'
-const apiUrl = inject('apiUrl')
+import { apiUrl } from '@/main';
 defineOptions({
     name: "UserProfile"
 })

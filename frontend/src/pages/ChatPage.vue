@@ -5,8 +5,7 @@ import { useWebsocketStore } from '@/stores/websocket'
 import { nextTick, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
-import { inject } from 'vue'
-const apiUrl = inject('apiUrl')
+import { apiUrl } from '@/main';
 
 onMounted(async() => {
     websocketStore.$reset()

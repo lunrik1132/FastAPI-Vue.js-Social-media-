@@ -4,7 +4,7 @@ import { useUserStore } from './user';
 import { useChatStore } from './chat';
 import { api } from '@/api';
 import { inject } from 'vue'
-const apiUrl = inject('apiUrl')
+import { apiUrl } from '@/main';
 export const useWebsocketStore = defineStore('websockets', {
     state: () => ({
         ws: null,

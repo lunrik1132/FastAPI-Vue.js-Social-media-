@@ -1,8 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from 'axios';
 import { api } from '@/api';
-import { inject } from 'vue'
-const apiUrl = inject('apiUrl')
+import { apiUrl } from '@/main';
 const getPayload = () => {
     const token = localStorage.getItem('access_token');
     if (!token) return {};
