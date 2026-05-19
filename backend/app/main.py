@@ -30,7 +30,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.mount("/static", StaticFiles(directory=settings.static_dir), name="static")
+app.mount(
+    "/static", StaticFiles(directory=settings.static_dir, html=True), name="static"
+)
 
 app.include_router(users_router)
 app.include_router(friendship_router)
