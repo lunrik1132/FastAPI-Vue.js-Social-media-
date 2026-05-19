@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { apiUrl } from './main'
+const apiUrl = 'https://fastapi-vue-js-social-media-1.onrender.com'
 
 export const api = axios.create({
   baseURL: apiUrl
