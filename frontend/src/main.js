@@ -9,7 +9,7 @@ import router from './router/router'
 const app = createApp(App)
 const pinia = createPinia()
 
-export const apiUrl = 'https://fastapi-vue-js-social-media-1.onrender.com'
+export const apiUrl = 'https://fastapi-vue-js-social-media-1-dflv.onrender.com'
 
 app.use(router)
    .use(pinia)
